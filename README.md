@@ -33,7 +33,7 @@ observe(log, chunksOf(3, xs))
 will **lose** chunks if `n` not divide evenly
 
 ```js
-observe(log, chunkEvery(3, xs)) // does *not* produce extra chunks
+observe(log, chunkEvery(3, xs))
 /*
 [1,2,3]
 [4,5,6]
