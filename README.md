@@ -12,7 +12,7 @@ npm install most-chunksOf
 
 ### chunksOf 
 
-will include chunks even if `n` does not divide evenly
+will **include** chunks if `n` does not divide evenly
 
 ```js
 import { chunksOf, chunkEvery } from 'most-chunksOf'
@@ -30,7 +30,7 @@ observe(log, chunksOf(3, xs))
 
 ### chunkEvery 
 
-will potential lose chunks if not within `n`
+will **lose** chunks if `n` not divide evenly
 
 ```js
 observe(log, chunkEvery(3, xs)) // does *not* produce extra chunks
