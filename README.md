@@ -1,33 +1,46 @@
-# mostjs package-starter
+# most-chunksOf
 
-A starting point for new `@most` packages.
+Splits a list into length-n pieces akin to `bufferWithCount`, `batch`, `splitEvery`
 
-## Usage
-
-### Get it
+## Install
 
 ```shell
-$ git clone https://github.com/mostjs/package-starter my-awesome-package
-$ cd my-awesome-package
-$ rm -rf ./.git
-$ git init
-$ npm install
-$ sed -i 's/mostPackage/my-awesome-package/g' package.json
+npm install most-chunksOf
 ```
 
-or one-line install:
+## API
+
+### chunksOf 
+
+will include chunks even if `n` does not divide evenly
+
+```js
+import { chunksOf, chunkEvery } from 'most-chunksOf'
+import { from as fromArray, observe } from 'most'
+
+const log = console.log
+const xs = fromArray([1,2,3,4,5,6,7])
+observe(log, chunksOf(3, xs))
+/*
+[1,2,3]
+[4,5,6]
+[7]
+*/
+```
+
+### chunkEvery 
+
+will potential lose chunks if not within `n`
+
+```js
+observe(log, chunkEvery(3, xs)) // does *not* produce extra chunks
+/*
+[1,2,3]
+[4,5,6]
+*/
 
 ```
-bash <(curl -sSL https://git.io/vr1HI)
-```
 
-### Use it
+## Made with
 
-In your editor:
-
-1. Add a description of your awesome package and
-make sure to give yourself credit as the 'author' in the package.json
-2. Create well-tested awesomeness. :fire::fire:
-3. Tell us about the awesomeness you just created in your README.md
-
-Get this thing up on Github and NPM!
+[@most/package-starter](https://github.com/mostjs/package-starter)
