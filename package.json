@@ -1,0 +1,60 @@
+{
+  "name": "most-chunksOf",
+  "description": "splits a list into length-n pieces",
+  "version": "1.0.0",
+  "author": "David Chase <davidchase03@gmail.com> (github.com/davidchase)",
+  "bugs": {
+    "url": "https://github.com/mostjs/most-chunksOf/issues"
+  },
+  "devDependencies": {
+    "@most/eslint-config-most": "^1.0.3",
+    "assert": "^1.4.1",
+    "babel-eslint": "^7.1.1",
+    "buba": "^4.0.1",
+    "eslint": "^3.12.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "fixpack": "2.3.1",
+    "istanbul": "^1.1.0-alpha.1",
+    "jsinspect": "^0.8.0",
+    "mocha": "^3.2.0",
+    "most": "^1.1.1",
+    "rollup": "^0.38.2",
+    "rollup-plugin-buble": "^0.15.0",
+    "uglify-js": "^2.7.5",
+    "umd-name-transform": "^1.0.1"
+  },
+  "files": [
+    "dist/most-chunksOf.js"
+  ],
+  "homepage": "https://github.com/mostjs/most-chunksOf#readme",
+  "keywords": [
+    "batch",
+    "bufferWithCount",
+    "chunksOf",
+    "most.js",
+    "observable",
+    "reactive",
+    "splitEvery",
+    "streams"
+  ],
+  "license": "MIT",
+  "main": "dist/most-chunksOf.js",
+  "peerDependencies": {
+    "most": "^1.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mostjs/most-chunksOf.git"
+  },
+  "scripts": {
+    "build": "npm run build-dist && uglifyjs dist/most-chunksOf.js -o dist/most-chunksOf.min.js",
+    "build-dist": "mkdir -p dist && rollup -c --name 'most-chunksOf' -o dist/most-chunksOf.js",
+    "lint": "jsinspect src && jsinspect test && eslint src test",
+    "prepublish": "npm run build",
+    "preversion": "npm run build",
+    "test": "npm run lint && npm run unit-test",
+    "unit-test": "istanbul cover _mocha"
+  }
+}
