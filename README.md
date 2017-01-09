@@ -12,7 +12,7 @@ npm install most-chunksOf
 
 ### chunksOf 
 
-will **include** chunks if `n` does not divide evenly
+Split a list based on the supplied `n` argument
 
 ```js
 import { chunksOf } from 'most-chunksOf'
