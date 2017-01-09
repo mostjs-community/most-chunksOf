@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-    typeof define === 'function' && define.amd ? define(['exports'], factory) :
-    (factory((global['most-chunksOf'] = global['most-chunksOf'] || {})));
-}(this, (function (exports) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@most/prelude')) :
+    typeof define === 'function' && define.amd ? define(['exports', '@most/prelude'], factory) :
+    (factory((global['most-chunksOf'] = global['most-chunksOf'] || {}),global._most_prelude));
+}(this, (function (exports,_most_prelude) { 'use strict';
 
 var FullBufferSink = function FullBufferSink(n, sink) {
     this.n = n;
@@ -28,33 +28,15 @@ FullBufferSink.prototype.end = function end (time, value) {
     return this.sink.end(time, value)
 };
 
-var PartialBufferSink = (function (FullBufferSink) {
-    function PartialBufferSink () {
-        FullBufferSink.apply(this, arguments);
-    }
-
-    if ( FullBufferSink ) PartialBufferSink.__proto__ = FullBufferSink;
-    PartialBufferSink.prototype = Object.create( FullBufferSink && FullBufferSink.prototype );
-    PartialBufferSink.prototype.constructor = PartialBufferSink;
-
-    PartialBufferSink.prototype.end = function end (time, value) {
-        return this.sink.end(time, value)
-    };
-
-    return PartialBufferSink;
-}(FullBufferSink));
-
 /** @license MIT License (c) copyright 2016 original author or authors */
 
 var chunksStream = function (n, stream, constr) { return new stream.constructor({
     run: function (sink, scheduler) { return stream.source.run(new constr(n, sink), scheduler); }
 }); };
 
-var chunksOf = function (n, stream) { return chunksStream(n, stream, FullBufferSink); };
-var chunkEvery = function (n, stream) { return chunksStream(n, stream, PartialBufferSink); };
+var chunksOf = _most_prelude.curry2(function (n, stream) { return chunksStream(n, stream, FullBufferSink); });
 
 exports.chunksOf = chunksOf;
-exports.chunkEvery = chunkEvery;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
