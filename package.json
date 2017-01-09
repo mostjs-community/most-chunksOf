@@ -1,5 +1,5 @@
 {
-  "name": "most-chunksOf",
+  "name": "most-chunksof",
   "description": "splits a list into length-n pieces",
   "version": "2.0.0",
   "author": "David Chase <davidchase03@gmail.com> (github.com/davidchase)",
