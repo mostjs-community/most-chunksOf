@@ -23,9 +23,3 @@ export class FullBufferSink {
         return this.sink.end(time, value)
     }
 }
-
-export class PartialBufferSink extends FullBufferSink {
-    end(time, value) {
-        return this.sink.end(time, value)
-    }
-}
