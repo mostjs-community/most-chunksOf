@@ -5,7 +5,7 @@ Splits a list into length-n pieces akin to `bufferWithCount`, `batch`, `splitEve
 ## Install
 
 ```shell
-npm install most-chunksOf
+npm install most-chunksof
 ```
 
 ## API
