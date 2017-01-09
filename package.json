@@ -56,5 +56,8 @@
     "preversion": "npm run build",
     "test": "npm run lint && npm run unit-test",
     "unit-test": "istanbul cover _mocha"
+  },
+  "dependencies": {
+    "@most/prelude": "1.4.1"
   }
 }
