@@ -1,40 +1,45 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@most/prelude')) :
-    typeof define === 'function' && define.amd ? define(['exports', '@most/prelude'], factory) :
-    (factory((global['most-chunksOf'] = global['most-chunksOf'] || {}),global._most_prelude));
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@most/prelude')) :
+  typeof define === 'function' && define.amd ? define(['exports', '@most/prelude'], factory) :
+  (factory((global['most-chunksOf'] = global['most-chunksOf'] || {}),global._most_prelude));
 }(this, (function (exports,_most_prelude) { 'use strict';
 
-var FullBufferSink = function FullBufferSink(n, sink) {
-    this.n = n;
-    this.sink = sink;
-    this.xs = [];
+var ChunksOfSink = function ChunksOfSink (n, sink) {
+  this.n = n;
+  this.sink = sink;
+  this.xs = new Array(this.n);
+  this.length = 0;
 };
-FullBufferSink.prototype.event = function event (time, value) {
-    var sink = this.sink;
-    this.xs.push(value);
-    if (this.n === this.xs.length) {
-        var list = this.xs;
-        this.xs = [];
-        return sink.event(time, list)
-    }
+
+ChunksOfSink.prototype.event = function event (time, value) {
+  this.xs[this.length++] = value;
+
+  if (this.n === this.length) {
+    var chunk = this.xs;
+    this.xs = new Array(this.n);
+    this.length = 0;
+    this.sink.event(time, chunk);
+  }
 };
-FullBufferSink.prototype.error = function error (time, err) {
-    return this.sink.error(time, err)
+
+ChunksOfSink.prototype.error = function error (time, err) {
+  return this.sink.error(time, err)
 };
-FullBufferSink.prototype.end = function end (time, value) {
-    if (this.xs.length > 0) {
-        this.sink.event(time, this.xs);
-    }
-    return this.sink.end(time, value)
+
+ChunksOfSink.prototype.end = function end (time, value) {
+  if (this.length > 0) {
+    this.sink.event(time, this.xs);
+  }
+  return this.sink.end(time, value)
 };
 
 /** @license MIT License (c) copyright 2016 original author or authors */
 
-var chunksStream = function (n, stream, constr) { return new stream.constructor({
-    run: function (sink, scheduler) { return stream.source.run(new constr(n, sink), scheduler); }
+var chunksOfStream = function (n, stream) { return new stream.constructor({
+  run: function (sink, scheduler) { return stream.source.run(new ChunksOfSink(n, sink), scheduler); }
 }); };
 
-var chunksOf = _most_prelude.curry2(function (n, stream) { return chunksStream(n, stream, FullBufferSink); });
+var chunksOf = _most_prelude.curry2(chunksOfStream);
 
 exports.chunksOf = chunksOf;
 
