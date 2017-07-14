@@ -1,7 +1,7 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@most/prelude')) :
-  typeof define === 'function' && define.amd ? define(['exports', '@most/prelude'], factory) :
-  (factory((global['most-chunksOf'] = global['most-chunksOf'] || {}),global._most_prelude));
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@most/prelude')) :
+	typeof define === 'function' && define.amd ? define(['exports', '@most/prelude'], factory) :
+	(factory((global['most-chunksOf'] = {}),global._most_prelude));
 }(this, (function (exports,_most_prelude) { 'use strict';
 
 var ChunksOfSink = function ChunksOfSink (n, sink) {

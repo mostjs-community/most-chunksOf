@@ -4,31 +4,31 @@
   "version": "2.0.1",
   "author": "David Chase <davidchase03@gmail.com> (github.com/davidchase)",
   "bugs": {
-    "url": "https://github.com/mostjs/most-chunksOf/issues"
+    "url": "https://github.com/mostjs-community/most-chunksOf/issues"
   },
   "devDependencies": {
     "@most/eslint-config-most": "^1.0.3",
     "assert": "^1.4.1",
     "babel-eslint": "^7.1.1",
     "buba": "^4.0.1",
-    "eslint": "^3.12.1",
-    "eslint-config-standard": "^6.2.1",
+    "eslint": "^4.2.0",
+    "eslint-config-standard": "^10.2.1",
     "eslint-plugin-promise": "^3.4.0",
-    "eslint-plugin-standard": "^2.0.1",
+    "eslint-plugin-standard": "^3.0.1",
     "fixpack": "2.3.1",
     "istanbul": "^1.1.0-alpha.1",
-    "jsinspect": "^0.8.0",
+    "jsinspect": "^0.12.6",
     "mocha": "^3.2.0",
     "most": "^1.1.1",
-    "rollup": "^0.38.2",
+    "rollup": "^0.45.2",
     "rollup-plugin-buble": "^0.15.0",
-    "uglify-js": "^2.7.5",
+    "uglify-js": "^3.0.24",
     "umd-name-transform": "^1.0.1"
   },
   "files": [
     "dist/most-chunksOf.js"
   ],
-  "homepage": "https://github.com/mostjs/most-chunksOf#readme",
+  "homepage": "https://github.com/mostjs-community/most-chunksOf#readme",
   "keywords": [
     "batch",
     "bufferWithCount",
@@ -46,7 +46,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mostjs/most-chunksOf.git"
+    "url": "git+https://github.com/mostjs-community/most-chunksOf.git"
   },
   "scripts": {
     "build": "npm run build-dist && uglifyjs dist/most-chunksOf.js -o dist/most-chunksOf.min.js",
@@ -58,6 +58,6 @@
     "unit-test": "istanbul cover _mocha"
   },
   "dependencies": {
-    "@most/prelude": "1.4.1"
+    "@most/prelude": "^1.6.2"
   }
 }
